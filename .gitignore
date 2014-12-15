@@ -1,0 +1,10 @@
+# auto generation
+*.bin
+*.elf
+*.lst
+*.hex
+
+*.out
+
+#object
+.o
