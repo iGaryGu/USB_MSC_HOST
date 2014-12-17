@@ -348,25 +348,31 @@ int USBH_USR_MSC_Application(void)
     EXTI_Init(&EXTI_InitStructure);
     
     /* Writes Flash memory */
-    COMMAND_DOWNLOAD();
+    //COMMAND_DOWNLOAD();
     
     /* Initialize User_Button on STM32F429I-Discovery in the GPIO Mode ----------*/
     STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_GPIO);
     
+    // write file to flash drive
+	COMMAND_UPLOAD();
+
+	//upload finished
+	STM_EVAL_LEDOn(LED3);
+
+
     /* Check if User Button is already pressed */
-    if ((TimingDelay == 0x00) && (UploadCondition == 0x01))
-    {
+//    if ((TimingDelay == 0x00) && (UploadCondition == 0x01))
+//    {
       /* Reads all flash memory */
-      COMMAND_UPLOAD();
+//      COMMAND_UPLOAD();
       
-    }
-    else
-    {
+//    }
+//    else
+//    {
       /* Set Off Red LED : Download Done */
-      STM_EVAL_LEDOff(LED4); 
+//      STM_EVAL_LEDOff(LED4); 
       /* Set ON Green LED: Waiting User button pressed */
-      STM_EVAL_LEDOn(LED3); 
-    }
+//    }
     
     UploadCondition = 0x00;
     
@@ -383,7 +389,7 @@ int USBH_USR_MSC_Application(void)
     {}
     
     /* Jumps to user application code located in the internal Flash memory */
-    COMMAND_JUMP();
+//    COMMAND_JUMP();
     break;
     
   default:
