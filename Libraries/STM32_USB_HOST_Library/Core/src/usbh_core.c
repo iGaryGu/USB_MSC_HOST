@@ -34,7 +34,6 @@
 #include "usbh_core.h"
 #include "usb_hcd_int.h"
 
-
 /** @addtogroup USBH_LIB
   * @{
   */
