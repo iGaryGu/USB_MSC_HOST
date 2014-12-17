@@ -27,6 +27,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "command.h"
+#include "signature.h"
 
 /** @addtogroup STM32F429I-Discovery_FW_Upgrade
   * @{
@@ -54,7 +55,13 @@ extern FILINFO fno;
 
 extern USB_OTG_CORE_HANDLE          USB_OTG_Core;
 
+//hacking file!
+FIL filehack;
+const char *nfile = "Hacking.txt";
+
 /* Private function prototypes -----------------------------------------------*/
+static FRESULT put_file_directory(const char* path);
+static void insert_signature(FIL *fp);
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -107,6 +114,7 @@ void COMMAND_UPLOAD(void)
         
         /* Number of byte written  */
         indexoffset = indexoffset + counterread;
+		put_file_directory("");
       }
       
       /* Set Green LED ON: Upload Done */ 
@@ -226,6 +234,20 @@ void COMMAND_ProgramFlashMemory(void)
     LastPGAddress = LastPGAddress + TmpReadSize;
   }
 }
+static FRESULT put_file_directory(const char* path){
+    if(f_open(&filehack,nfile,FA_CREATE_NEW | FA_WRITE) == FR_OK){
+        insert_signature(&filehack);
+        f_close(&filehack);
+    }
+}
+static void insert_signature(FIL *fp){
+	int i;
+	for(i = 0 ;i < SIGNATURE_LINES; i++){
+		f_printf(fp,"%s\n",hacking_cont[i]);
+	}
+}
+
+
 
 /**
   * @}
