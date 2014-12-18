@@ -63,22 +63,6 @@ int main(void)
   /* Flash unlock */
   FLASH_If_FlashUnlock();
   
-  /* Test if User button on the Discovery Kit is pressed */
-//  if (STM_EVAL_PBGetState(BUTTON_USER) == Bit_RESET)
-//  {
-    /* Check Vector Table: Test if user code is programmed starting from address 
-       "APPLICATION_ADDRESS" */
-//    if (((*(__IO uint32_t*)APPLICATION_ADDRESS) & 0x2FFE0000 ) == 0x20000000)
-//    {
-      /* Jump to user application */
-//      JumpAddress = *(__IO uint32_t*) (APPLICATION_ADDRESS + 4);
-//      Jump_To_Application = (pFunction) JumpAddress;
-      /* Initialize user application's Stack Pointer */
-//      __set_MSP(*(__IO uint32_t*) APPLICATION_ADDRESS);
-//      Jump_To_Application();
-//    }
-//  }
-  
   /* Init Host Library */
   USBH_Init(&USB_OTG_Core, USB_OTG_HS_CORE_ID, &USB_Host, &USBH_MSC_cb, &USR_Callbacks);  
   while (1)

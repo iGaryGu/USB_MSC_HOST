@@ -5,6 +5,7 @@
 *.hex
 
 *.out
+*.swp
 
 #object
 .o
